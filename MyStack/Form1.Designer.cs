@@ -30,16 +30,23 @@
         {
             this.button1 = new System.Windows.Forms.Button();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.StackArrayView = new System.Windows.Forms.ListBox();
+            this.IntStackArrayView = new System.Windows.Forms.ListBox();
             this.button2 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.PalindromeOUT = new System.Windows.Forms.TextBox();
+            this.PalindromeIN = new System.Windows.Forms.TextBox();
+            this.PalindromeRESULT = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(96, 145);
+            this.button1.Location = new System.Drawing.Point(57, 51);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 0;
@@ -49,22 +56,22 @@
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(74, 119);
+            this.numericUpDown1.Location = new System.Drawing.Point(35, 25);
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
             this.numericUpDown1.TabIndex = 1;
             // 
-            // StackArrayView
+            // IntStackArrayView
             // 
-            this.StackArrayView.FormattingEnabled = true;
-            this.StackArrayView.Location = new System.Drawing.Point(258, 12);
-            this.StackArrayView.Name = "StackArrayView";
-            this.StackArrayView.Size = new System.Drawing.Size(120, 238);
-            this.StackArrayView.TabIndex = 2;
+            this.IntStackArrayView.FormattingEnabled = true;
+            this.IntStackArrayView.Location = new System.Drawing.Point(197, 12);
+            this.IntStackArrayView.Name = "IntStackArrayView";
+            this.IntStackArrayView.Size = new System.Drawing.Size(120, 238);
+            this.IntStackArrayView.TabIndex = 2;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(177, 266);
+            this.button2.Location = new System.Drawing.Point(57, 158);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 3;
@@ -74,7 +81,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(258, 268);
+            this.textBox1.Location = new System.Drawing.Point(35, 187);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(120, 20);
@@ -82,7 +89,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(96, 266);
+            this.button3.Location = new System.Drawing.Point(57, 129);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 5;
@@ -90,15 +97,82 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(418, 88);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(120, 23);
+            this.button4.TabIndex = 11;
+            this.button4.Text = "Check Palindrome";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // PalindromeOUT
+            // 
+            this.PalindromeOUT.Location = new System.Drawing.Point(418, 129);
+            this.PalindromeOUT.Name = "PalindromeOUT";
+            this.PalindromeOUT.ReadOnly = true;
+            this.PalindromeOUT.Size = new System.Drawing.Size(120, 20);
+            this.PalindromeOUT.TabIndex = 10;
+            // 
+            // PalindromeIN
+            // 
+            this.PalindromeIN.Location = new System.Drawing.Point(418, 62);
+            this.PalindromeIN.Name = "PalindromeIN";
+            this.PalindromeIN.Size = new System.Drawing.Size(120, 20);
+            this.PalindromeIN.TabIndex = 12;
+            // 
+            // PalindromeRESULT
+            // 
+            this.PalindromeRESULT.Location = new System.Drawing.Point(418, 161);
+            this.PalindromeRESULT.Name = "PalindromeRESULT";
+            this.PalindromeRESULT.ReadOnly = true;
+            this.PalindromeRESULT.Size = new System.Drawing.Size(120, 20);
+            this.PalindromeRESULT.TabIndex = 13;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(351, 65);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(61, 13);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "Input String";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(343, 132);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(69, 13);
+            this.label2.TabIndex = 15;
+            this.label2.Text = "Output String";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(375, 163);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(37, 13);
+            this.label3.TabIndex = 16;
+            this.label3.Text = "Result";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(451, 358);
+            this.ClientSize = new System.Drawing.Size(622, 277);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.PalindromeRESULT);
+            this.Controls.Add(this.PalindromeIN);
+            this.Controls.Add(this.button4);
+            this.Controls.Add(this.PalindromeOUT);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.StackArrayView);
+            this.Controls.Add(this.IntStackArrayView);
             this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.button1);
             this.Name = "Form1";
@@ -113,10 +187,17 @@
 
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.ListBox StackArrayView;
+        private System.Windows.Forms.ListBox IntStackArrayView;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.TextBox PalindromeOUT;
+        private System.Windows.Forms.TextBox PalindromeIN;
+        private System.Windows.Forms.TextBox PalindromeRESULT;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
     }
 }
 

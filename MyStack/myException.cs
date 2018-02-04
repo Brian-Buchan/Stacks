@@ -6,9 +6,37 @@ using System.Threading.Tasks;
 
 namespace MyStack
 {
-    class StackException : Exception
+    class StackFullException : Exception
     {
-        public StackException(string message) : base(message)
+        public StackFullException()
+        {
+
+        }
+
+        public StackFullException(string message) : base(message)
+        {
+
+        }
+
+        public StackFullException(string message, Exception inner) : base(message)
+        {
+
+        }
+    }
+
+    class StackEmptyException : Exception
+    {
+        public StackEmptyException()
+        {
+
+        }
+
+        public StackEmptyException(string message) : base(message)
+        {
+
+        }
+
+        public StackEmptyException(string message, Exception inner) : base(message)
         {
 
         }

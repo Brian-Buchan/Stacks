@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace MyStack
 {
-    class MyStack
+    class Palindrome
     {
-        int[] stackArray;
+        char[] stackArray;
         int arrayLenth;
 
         public int Length
@@ -21,13 +21,22 @@ namespace MyStack
             return stackArray[i];
         }
 
-        public MyStack()
+        public Palindrome()
         {
-            stackArray = new int[10];
+            stackArray = new char[20];
             arrayLenth = 0;
         }
 
-        public void Push(int p)
+        public void Clear()
+        {
+            for (int i = 0; i < stackArray.Length; i++)
+            {
+                stackArray[i] = ' ';
+            }
+            arrayLenth = 0;
+        }
+
+        public void Push(char c)
         {
             try
             {
@@ -37,7 +46,7 @@ namespace MyStack
                 }
                 else
                 {
-                    stackArray[arrayLenth] = p;
+                    stackArray[arrayLenth] = c;
                     arrayLenth++;
                 }
             }
@@ -47,7 +56,7 @@ namespace MyStack
             }
         }
 
-        public int Pop()
+        public char Pop()
         {
             try
             {
@@ -57,9 +66,9 @@ namespace MyStack
                 }
                 else
                 {
-                    int p = stackArray[arrayLenth - 1];
+                    char c = stackArray[arrayLenth - 1];
                     arrayLenth--;
-                    return p;
+                    return c;
                 }
             }
             catch (Exception)
@@ -68,7 +77,25 @@ namespace MyStack
             }
         }
 
-        public int Top()
+        public void FillPalindrome(string s)
+        {
+            Clear();
+            char[] c = s.ToCharArray();
+
+            for (int i = 0; i < c.Length; i++)
+            {
+                try
+                {
+                    Push(c[i]);
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+        }
+
+        public char[] GetPalindrome()
         {
             try
             {
@@ -78,8 +105,34 @@ namespace MyStack
                 }
                 else
                 {
-                    int TopINT = stackArray[arrayLenth - 1];
-                    return TopINT;
+                    char[] c = new char[arrayLenth];
+                    // THIS LINE MESSED ME UP FOR A WHILE BECAUSE POP() REDUCES THE PARAMETER ARRAYLENGTH WHICH WAS BEING CHECKED AGAINST I
+                    // NEEDED TO BE CHECKED AGAINST 0 AND I NOT CHECKED AT ALL
+                    for (int i = 0; arrayLenth > 0; i++)
+                    {
+                        c[i] = Pop();
+                    }
+                    return c;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public char Top()
+        {
+            try
+            {
+                if (IsEmpty())
+                {
+                    throw new StackEmptyException("Empty");
+                }
+                else
+                {
+                    char c = stackArray[arrayLenth - 1];
+                    return c;
                 }
 
             }
