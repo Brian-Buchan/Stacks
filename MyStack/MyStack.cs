@@ -23,7 +23,7 @@ namespace MyStack
 
         public MyStack()
         {
-            stackArray = new int[10];
+            stackArray = new int[100];
             arrayLenth = 0;
         }
 
