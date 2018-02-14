@@ -67,5 +67,5 @@ namespace MyStack
         }
     }
 
-    enum MazeType { Open, Wall, Start, Finish }
+    enum MazeType { Open, Wall, Start, Finish, Attempted }
 }

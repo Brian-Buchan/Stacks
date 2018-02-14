@@ -52,6 +52,9 @@ namespace MyStack
                 case MazeType.Finish:
                     dataGridView1.Rows[r].Cells[c].Style.BackColor = Color.Red;
                     break;
+                case MazeType.Attempted:
+                    dataGridView1.Rows[r].Cells[c].Style.BackColor = Color.Pink;
+                    break;
                 default:
                     dataGridView1.Rows[r].Cells[c].Style.BackColor = Color.White;
                     break;
@@ -207,31 +210,42 @@ namespace MyStack
 
                 while (LookingForSolution(finished))
                 {
-                    System.Threading.Thread.Sleep(50);
+                    // Resets NEXT during loop after each step is taken
+                    Next[0] = -1;
+                    Next[1] = -1;
+
+                    //System.Threading.Thread.Sleep(50);
                     path = new Paths();
                     CheckAround(ref path, Current, ref Next, pathStack);
-                    switch (path.NumberOf)
-                    {
-                        case 0:
-                            // No Paths
+                    NEWTakeStep(Next, Current, ref pathStack);
 
-                            break;
-                        case 1:
-                            // 1 Path
-                            TakeNextStep(Next, Current, ref pathStack);
-                            Current[0] = Next[0];
-                            Current[1] = Next[1];
-                            UpdatePathCell(Current[0], Current[1]);
-                            break;
-                        default:
-                            // More than 1 Paths
-                            pathStack.Push(-1);
-                            TakeNextStep(Next, Current, ref pathStack);
-                            Current[0] = Next[0];
-                            Current[1] = Next[1];
-                            UpdatePathCell(Current[0], Current[1]);
-                            break;
-                    }
+                    #region old
+                    //switch (path.NumberOf)
+                    //{
+                    //    case 0:
+                    //        // No Paths
+                    //        int NumberOfChoices = new int();
+                    //        RewindPath(ref pathStack, ref NumberOfChoices);
+                    //        TakeStepAfterNext(Next, Current, ref pathStack, NumberOfChoices);
+                    //        break;
+                    //    case 1:
+                    //        // 1 Path
+                    //        TakeNextStep(Next, Current, ref pathStack);
+                    //        Current[0] = Next[0];
+                    //        Current[1] = Next[1];
+                    //        UpdatePathCell(Current[0], Current[1]);
+                    //        break;
+                    //    default:
+                    //        // More than 1 Paths
+                    //        pathStack.Push(-1);
+                    //        TakeNextStep(Next, Current, ref pathStack);
+                    //        Current[0] = Next[0];
+                    //        Current[1] = Next[1];
+                    //        UpdatePathCell(Current[0], Current[1]);
+                    //        break;
+                    //}
+
+                    #endregion
                     CheckFinished(ref finished, Current);
                 }
                 for (int i = pathStack.Length; i > 0; i--)
@@ -269,6 +283,63 @@ namespace MyStack
             }
         }
 
+        private void NEWTakeStep(int[] next, int[] Current, ref MyStack stack)
+        {
+            // Directions are based off of how NEXT is set during CHECK-AROUND method
+
+            if (Current[0] > next[0] && Current[1] == next[1])
+            {
+                // Go West = 1
+                stack.Push(1);
+            }
+            else if (Current[0] == next[0] && Current[1] < next[1])
+            {
+                // Go South = 2
+                stack.Push(2);
+            }
+            else if (Current[0] < next[0] && Current[1] == next[1])
+            {
+                // Go East = 3
+                stack.Push(3);
+            }
+            else if (Current[0] == next[0] && Current[1] > next[1])
+            {
+                // Go North = 4
+                stack.Push(4);
+            }
+            else
+            {
+                RewindPath();
+            }
+        }
+
+        private void RewindPath(ref MyStack stack, ref int NumberOfChoices)
+        {
+            int first;
+            bool RewindingToChoice = true;
+            while (RewindingToChoice)
+            {
+                first = stack.Pop();
+                if (first == -1)
+                {
+                    bool CheckingHowManyChoices = true;
+                    NumberOfChoices = 1;
+                    int next;
+                    while (CheckingHowManyChoices)
+                    {
+                        next = stack.Pop();
+                        if (next == -1)
+                            NumberOfChoices++;
+                        else
+                        {
+                            CheckingHowManyChoices = false;
+                            stack.Push(next);
+                        }
+                    }
+                }
+            }
+        }
+
         private void CheckFinished(ref bool finished, int[] Current)
         {
             if (myMaze.maze[Current[0], Current[1]] == MazeType.Finish)
@@ -285,7 +356,7 @@ namespace MyStack
             // Previous location directions are set in TAKE-NEXT-STEP method
 
             // Checks Top - 2 Is a South Direction
-            if (myMaze.maze[current[0], current[1] - 1] != MazeType.Wall && pathStack.Top() != 2)
+            if (myMaze.maze[current[0], current[1] - 1] != MazeType.Wall && pathStack.Top() != 2 && myMaze.maze[current[0], current[1] - 1] != MazeType.Attempted)
             {
                 if (myMaze.maze[current[0], current[1] - 1] != MazeType.Start)
                 {
@@ -295,7 +366,7 @@ namespace MyStack
                 }
             }
             // Checks Right - 1 Is a West Direction
-            if (myMaze.maze[current[0] + 1, current[1]] != MazeType.Wall && pathStack.Top() != 1)
+            if (myMaze.maze[current[0] + 1, current[1]] != MazeType.Wall && pathStack.Top() != 1 && myMaze.maze[current[0] + 1, current[1]] != MazeType.Attempted)
             {
                 if (myMaze.maze[current[0] + 1, current[1]] != MazeType.Start)
                 {
@@ -305,7 +376,7 @@ namespace MyStack
                 }
             }
             // Checks Bottom - 4 Is a North Direction
-            if (myMaze.maze[current[0], current[1] + 1] != MazeType.Wall && pathStack.Top() != 4)
+            if (myMaze.maze[current[0], current[1] + 1] != MazeType.Wall && pathStack.Top() != 4 && myMaze.maze[current[0], current[1] + 1] != MazeType.Attempted)
             {
                 if (myMaze.maze[current[0], current[1] + 1] != MazeType.Start)
                 {
@@ -315,7 +386,7 @@ namespace MyStack
                 }
             }
             // Checks Left - 3 Is a East Direction
-            if (myMaze.maze[current[0] - 1, current[1]] != MazeType.Wall && pathStack.Top() != 3)
+            if (myMaze.maze[current[0] - 1, current[1]] != MazeType.Wall && pathStack.Top() != 3 && myMaze.maze[current[0] - 1, current[1]] != MazeType.Attempted)
             {
                 if (myMaze.maze[current[0] - 1, current[1]] != MazeType.Start)
                 {
@@ -323,6 +394,32 @@ namespace MyStack
                     Next[0] = current[0] - 1;
                     Next[1] = current[1];
                 }
+            }
+        }
+
+        private void TakeStepAfterNext(int[] Next, int[] Current, ref MyStack pathStack, int NumberOfChoices)
+        {
+            // Directions are based off of how NEXT is set during CHECK-AROUND method
+
+            if (Current[0] > Next[0] && Current[1] == Next[1])
+            {
+                // Go West
+                pathStack.Push(1);
+            }
+            else if (Current[0] == Next[0] && Current[1] < Next[1])
+            {
+                // Go South
+                pathStack.Push(2);
+            }
+            else if (Current[0] < Next[0] && Current[1] == Next[1])
+            {
+                // Go East
+                pathStack.Push(3);
+            }
+            else if (Current[0] == Next[0] && Current[1] > Next[1])
+            {
+                // Go North
+                pathStack.Push(4);
             }
         }
 
