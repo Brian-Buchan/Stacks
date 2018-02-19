@@ -29,6 +29,117 @@ namespace MyStack
             UpdateMaze();
         }
 
+        #region Previous
+        private void button1_Click(object sender, EventArgs e)
+        {
+            AddNumberToStack((int)numericUpDown1.Value);
+            ClearText();
+            showStack();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            PopNumber();
+            showStack();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            TakeTop();
+            showStack();
+        }
+
+        private void AddNumberToStack(int i)
+        {
+            try
+            {
+                ThisStack.Push(i);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("The stack is full.");
+                textBox1.Text = "";
+            }
+        }
+
+        private void PopNumber()
+        {
+            try
+            {
+                int i = ThisStack.Pop();
+                textBox1.Text = i.ToString();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("The stack is empty.");
+                textBox1.Text = "";
+            }
+        }
+
+        private void TakeTop()
+        {
+            try
+            {
+                int i = ThisStack.Top();
+                textBox1.Text = i.ToString();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("The stack is empty.");
+                textBox1.Text = "";
+            }
+        }
+
+        private void ClearText()
+        {
+            textBox1.Clear();
+        }
+
+        private void showStack()
+        {
+            IntStackArrayView.Items.Clear();
+            for (int i = 0; i < ThisStack.Length; i++)
+            {
+                IntStackArrayView.Items.Add(ThisStack.GetItem(i));
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            PalindromeIN.Text = SpecialCharRemover.RemoveSpecialCharacters(PalindromeIN.Text);
+
+            try
+            {
+                myPalindrome.FillPalindrome(PalindromeIN.Text.ToLower().Trim());
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("The string is too long. Max 20 chars.");
+            }
+
+            try
+            {
+                string palindromOUT = new string(myPalindrome.GetPalindrome());
+                PalindromeOUT.Text = palindromOUT;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("There was an error reading the String.");
+            }
+
+            if (PalindromeIN.Text == PalindromeOUT.Text)
+            {
+                PalindromeRESULT.Text = "Is a Palindrome!";
+            }
+            else
+            {
+                PalindromeRESULT.Text = "Is not a Palindrome.";
+            }
+        }
+
+
+        #endregion
+
         #region Assignment 3
         #region Q1
 
@@ -72,6 +183,11 @@ namespace MyStack
         private void UpdatePathCell(int c, int r)
         {
             dataGridView1.Rows[r].Cells[c].Style.BackColor = Color.Cyan;
+        }
+
+        private void UpdateRewindCell(int c, int r)
+        {
+            dataGridView1.Rows[r].Cells[c].Style.BackColor = Color.Pink;
         }
 
         private void GenerateMaze()
@@ -153,6 +269,7 @@ namespace MyStack
                 {
                     SetNextStep(Current, ref Next, ref pathStack);
                     TakeNextStep(ref Current, Next, ref pathStack);
+                    UpdatePathCell(Current.Column, Current.Row);
 
                     CheckFinished(ref isSearching, Current);
                 }
@@ -327,6 +444,7 @@ namespace MyStack
                     {
                         // IS NOT CHOICE - Keep Popping
                         ThisPop = stack.Pop();
+                        UpdateRewindCell(Current.Column, Current.Row);
                         MoveCurrent(ThisPop, ref Current, ref stack);
                     }
                 }
@@ -447,116 +565,35 @@ namespace MyStack
             }
         }
         #endregion
+
         #endregion
 
-        #region Previous
-        private void button1_Click(object sender, EventArgs e)
-        {
-            AddNumberToStack((int)numericUpDown1.Value);
-            ClearText();
-            showStack();
-        }
+        #region Assignment 4
 
-        private void button2_Click(object sender, EventArgs e)
+        #region Q1
+        private void button9_Click(object sender, EventArgs e)
         {
-            PopNumber();
-            showStack();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            TakeTop();
-            showStack();
-        }
-
-        private void AddNumberToStack(int i)
-        {
-            try
+            int i = 1;
+            while (i > 0)
             {
-                ThisStack.Push(i);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("The stack is full.");
-                textBox1.Text = "";
+                i = DoSquare((int)numericUpDown3.Value);
+                int half = i / 2;
+                numericUpDown3.Value = half;
+                listBox3.Items.Add(half.ToString());
+                listBox4.Items.Add(i.ToString());
             }
         }
 
-        private void PopNumber()
+        private int DoSquare(int n)
         {
-            try
-            {
-                int i = ThisStack.Pop();
-                textBox1.Text = i.ToString();
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("The stack is empty.");
-                textBox1.Text = "";
-            }
+            return (int)Math.Sqrt(n);
         }
 
-        private void TakeTop()
-        {
-            try
-            {
-                int i = ThisStack.Top();
-                textBox1.Text = i.ToString();
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("The stack is empty.");
-                textBox1.Text = "";
-            }
-        }
+        #endregion
 
-        private void ClearText()
-        {
-            textBox1.Clear();
-        }
+        #region Q2
 
-        private void showStack()
-        {
-            IntStackArrayView.Items.Clear();
-            for (int i = 0; i < ThisStack.Length; i++)
-            {
-                IntStackArrayView.Items.Add(ThisStack.GetItem(i));
-            }
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            PalindromeIN.Text = SpecialCharRemover.RemoveSpecialCharacters(PalindromeIN.Text);
-
-            try
-            {
-                myPalindrome.FillPalindrome(PalindromeIN.Text.ToLower().Trim());
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("The string is too long. Max 20 chars.");
-            }
-
-            try
-            {
-                string palindromOUT = new string(myPalindrome.GetPalindrome());
-                PalindromeOUT.Text = palindromOUT;
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("There was an error reading the String.");
-            }
-
-            if (PalindromeIN.Text == PalindromeOUT.Text)
-            {
-                PalindromeRESULT.Text = "Is a Palindrome!";
-            }
-            else
-            {
-                PalindromeRESULT.Text = "Is not a Palindrome.";
-            }
-        }
-
+        #endregion
 
         #endregion
 
