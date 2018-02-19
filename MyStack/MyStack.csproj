@@ -52,10 +52,10 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Maze.cs" />
+    <Compile Include="MazeCell.cs" />
     <Compile Include="myException.cs" />
     <Compile Include="MyStack.cs" />
     <Compile Include="Palindrome.cs" />
-    <Compile Include="Paths.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpecialCharRemover.cs" />

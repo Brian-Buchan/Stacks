@@ -58,6 +58,7 @@ namespace MyStack
                 else
                 {
                     int p = stackArray[arrayLenth - 1];
+                    stackArray[arrayLenth - 1] = 0;
                     arrayLenth--;
                     return p;
                 }

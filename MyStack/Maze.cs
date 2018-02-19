@@ -65,6 +65,26 @@ namespace MyStack
                     break;
             }
         }
+
+        public MazeType South(int c, int r)
+        {
+            return maze[c, r + 1];
+        }
+
+        public MazeType East(int c, int r)
+        {
+            return maze[c + 1, r];
+        }
+
+        public MazeType North(int c, int r)
+        {
+            return maze[c, r - 1];
+        }
+
+        public MazeType West(int c, int r)
+        {
+            return maze[c - 1, r];
+        }
     }
 
     enum MazeType { Open, Wall, Start, Finish, Attempted }

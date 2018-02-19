@@ -25,6 +25,8 @@ namespace MyStack
             UpdateMaze();
         }
 
+        #region Assignment 3
+        #region Form Methods
         private void UpdateMaze()
         {
             for (int c = 0; c < myMaze.maze.GetLength(0); c++)
@@ -71,6 +73,305 @@ namespace MyStack
             dataGridView1.Rows.Add(10);
         }
 
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            myMaze.SetNext(e.ColumnIndex, e.RowIndex);
+            UpdateCell(e.ColumnIndex, e.RowIndex);
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            List<string> Path = new List<string>();
+            CalculatePath(ref Path);
+            PrintPath(Path);
+        }
+
+        private bool IsMazeValid()
+        {
+            int starts = 0;
+            int finishes = 0;
+            foreach (MazeType cell in myMaze.maze)
+            {
+                if (cell == MazeType.Start)
+                {
+                    starts++;
+                }
+                else if (cell == MazeType.Finish)
+                {
+                    finishes++;
+                }
+            }
+
+            if (starts != 1 || finishes != 1)
+                return false;
+            else
+                return true;
+        }
+
+        private void PrintPath(List<string> Path)
+        {
+            listView1.Items.Clear();
+            foreach (string step in Path)
+            {
+                listView1.Items.Add(step);
+            }
+            MessageBox.Show("Fin!");
+            myMaze.ResetMaze();
+            UpdateMaze();
+        }
+
+        private void dataGridView1_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            this.dataGridView1.ClearSelection();
+        }
+
+        #endregion
+
+        private void CalculatePath(ref List<string> Path)
+        {
+            if (IsMazeValid())
+            {
+                MyStack pathStack = new MyStack();
+
+                // 0 Represents the Starting Point
+                pathStack.Push(0);
+
+                bool isSearching = true;
+
+                // TODO: Set From Form
+                MazeCell Current = new MazeCell();
+
+                int[] Next = new int[2] { 1, 1 };
+
+                while (isSearching)
+                {
+                    SetNextStep(Current, ref Next, ref pathStack);
+                    TakeNextStep(ref Current, Next, ref pathStack);
+
+                    CheckFinished(ref isSearching, Current);
+                }
+
+                for (int i = pathStack.Length; i > 0; i--)
+                {
+                    switch (pathStack.Pop())
+                    {
+                        case -1:
+                            // Don't write that a decision was made
+                            break;
+                        case 0:
+                            // Starting Location - Not Technically a Move
+                            break;
+                        case 1:
+                            Path.Add("West");
+                            break;
+                        case 2:
+                            Path.Add("South");
+                            break;
+                        case 3:
+                            Path.Add("East");
+                            break;
+                        case 4:
+                            Path.Add("North");
+                            break;
+                        default:
+                            Path.Add("Error");
+                            break;
+                    }
+                }
+                Path.Reverse();
+            }
+            else
+            {
+                MessageBox.Show("The Maze isn't valid.");
+            }
+        }
+
+        private void SetNextStep(MazeCell mazeCell, ref int[] Next, ref MyStack stack)
+        {
+            int choices = 0;
+            // IF statements check if the spot is open or the finish
+            // and sets the step to be taken
+            int currentColumn = mazeCell.Column;
+            int currentRow = mazeCell.Row;
+
+            // NORTH
+            if (myMaze.North(currentColumn, currentRow) == MazeType.Finish || myMaze.North(currentColumn, currentRow) == MazeType.Open)
+            {
+                Next[0] = currentColumn;
+                Next[1] = currentRow - 1;
+                choices++;
+            }
+            // EAST
+            if (myMaze.East(currentColumn, currentRow) == MazeType.Finish || myMaze.East(currentColumn, currentRow) == MazeType.Open)
+            {
+                Next[0] = currentColumn + 1;
+                Next[1] = currentRow;
+                choices++;
+            }
+            // SOUTH
+            if (myMaze.South(currentColumn, currentRow) == MazeType.Finish || myMaze.South(currentColumn, currentRow) == MazeType.Open)
+            {
+                Next[0] = currentColumn;
+                Next[1] = currentRow + 1;
+                choices++;
+            }
+            // WEST
+            if (myMaze.West(currentColumn, currentRow) == MazeType.Finish || myMaze.West(currentColumn, currentRow) == MazeType.Open)
+            {
+                Next[0] = currentColumn - 1;
+                Next[1] = currentRow;
+                choices++;
+            }
+
+            switch (choices)
+            {
+                case 0:
+                    // NO PATHS
+                    Next[0] = -1;
+                    Next[1] = -1;
+                    break;
+
+                default:
+                    // Pushes "Choice" Tracker onto the Stack
+                    if (choices > 1)
+                    {
+                        // Multiple Paths / -1 Means this choice has been made before so there is no need to add another -1 on the stack
+                        if (stack.Top() != -1)
+                        {
+                            stack.Push(-1);
+                        }
+                    }
+                    break;
+            }
+        }
+
+        private void ChangeTile(MazeCell Current)
+        {
+            if (myMaze.maze[Current.Column, Current.Row] != MazeType.Start)
+            {
+                myMaze.maze[Current.Column, Current.Row] = MazeType.Attempted;
+            }
+        }
+
+        private void TakeNextStep(ref MazeCell Current, int[] next, ref MyStack stack)
+        {
+            // Directions are based off of how NEXT is set during CHECK-AROUND method
+            if (Current.Column > next[0] && Current.Row == next[1])
+            {
+                // Go West = 1
+                stack.Push(1);
+                ChangeTile(Current);
+                Current.MoveWest();
+            }
+            else if (Current.Column == next[0] && Current.Row < next[1])
+            {
+                // Go South = 2
+                stack.Push(2);
+                ChangeTile(Current);
+                Current.MoveSouth();
+            }
+            else if (Current.Column < next[0] && Current.Row == next[1])
+            {
+                // Go East = 3
+                stack.Push(3);
+                ChangeTile(Current);
+                Current.MoveEast();
+            }
+            else if (Current.Column == next[0] && Current.Row > next[1])
+            {
+                // Go North = 4
+                stack.Push(4);
+                ChangeTile(Current);
+                Current.MoveNorth();
+            }
+            else
+            {
+                if (next[0] == -1 || next[1] == -1)
+                {
+                    // NO PATH
+                    RewindPath(ref stack, ref Current);
+                }
+                else
+                {
+                    // Error in Path
+                }
+            }
+        }
+
+        private void RewindPath(ref MyStack stack, ref MazeCell Current)
+        {
+            int ThisPop = stack.Pop();
+            bool revearsing = true;
+            while (revearsing)
+            {
+                // Check For Start
+                if (ThisPop != 0)
+                {
+                    // IS NOT START
+
+                    // Check Step
+                    if (ThisPop == -1)
+                    {
+                        // IS CHOICE - Try New Path
+                        revearsing = false;
+                        // Put Pop back on Stack to signify a choice
+                        stack.Push(-1);
+                    }
+                    else
+                    {
+                        // IS NOT CHOICE - Keep Popping
+                        ThisPop = stack.Pop();
+                        MoveCurrent(ThisPop, ref Current, ref stack);
+                    }
+                }
+                else
+                {
+                    // IS START - No Path
+                    revearsing = false;
+                    stack.Push(0);
+                }
+            }
+        }
+
+        private void MoveCurrent(int ThisPop, ref MazeCell Current, ref MyStack stack)
+        {
+            // SET CURRENT - setMove in opposite direction because we are revearsing
+            // 1 = W, 2 = S, 3 = E, 4 = N
+            switch (ThisPop)
+            {
+                case -1:
+                    // TODO: Fix recursion loop if stack.Top() fails to be a listed case
+                    MoveCurrent(stack.Top(), ref Current, ref stack);
+                    break;
+                case 1:
+                    Current.MoveEast();
+                    break;
+                case 2:
+                    Current.MoveNorth();
+                    break;
+                case 3:
+                    Current.MoveWest();
+                    break;
+                case 4:
+                    Current.MoveSouth();
+                    break;
+                default:
+                    // ERROR - Unidentified Direction or Choice
+                    break;
+            }
+        }
+
+        private void CheckFinished(ref bool searching, MazeCell Current)
+        {
+            if (myMaze.maze[Current.Column, Current.Row] == MazeType.Finish)
+            {
+                searching = false;
+            }
+        }
+
+        #endregion
+
+        #region Previous
         private void button1_Click(object sender, EventArgs e)
         {
             AddNumberToStack((int)numericUpDown1.Value);
@@ -178,322 +479,8 @@ namespace MyStack
             }
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            myMaze.SetNext(e.ColumnIndex, e.RowIndex);
-            UpdateCell(e.ColumnIndex, e.RowIndex);
-        }
+        #endregion
 
-        private void button5_Click(object sender, EventArgs e)
-        {
-            List<string> Path = new List<string>();
-            CalculatePath(ref Path);
-            PrintPath(Path);
-        }
 
-        private void CalculatePath(ref List<string> Path)
-        {
-            if (IsMazeValid())
-            {
-                MyStack pathStack = new MyStack();
-
-                // 0 Represents the Starting Point
-                pathStack.Push(0);
-
-                Paths path;
-                bool finished = false;
-                // TODO: Set From Form
-                int[] Current = new int[2] { 1, 1 };
-
-                // NEXT will get set in order of W, S, E, N if multiple paths are available
-                int[] Next = new int[2];
-
-                while (LookingForSolution(finished))
-                {
-                    // Resets NEXT during loop after each step is taken
-                    Next[0] = -1;
-                    Next[1] = -1;
-
-                    //System.Threading.Thread.Sleep(50);
-                    path = new Paths();
-                    CheckAround(ref path, Current, ref Next, pathStack);
-                    NEWTakeStep(Next, Current, ref pathStack);
-
-                    #region old
-                    //switch (path.NumberOf)
-                    //{
-                    //    case 0:
-                    //        // No Paths
-                    //        int NumberOfChoices = new int();
-                    //        RewindPath(ref pathStack, ref NumberOfChoices);
-                    //        TakeStepAfterNext(Next, Current, ref pathStack, NumberOfChoices);
-                    //        break;
-                    //    case 1:
-                    //        // 1 Path
-                    //        TakeNextStep(Next, Current, ref pathStack);
-                    //        Current[0] = Next[0];
-                    //        Current[1] = Next[1];
-                    //        UpdatePathCell(Current[0], Current[1]);
-                    //        break;
-                    //    default:
-                    //        // More than 1 Paths
-                    //        pathStack.Push(-1);
-                    //        TakeNextStep(Next, Current, ref pathStack);
-                    //        Current[0] = Next[0];
-                    //        Current[1] = Next[1];
-                    //        UpdatePathCell(Current[0], Current[1]);
-                    //        break;
-                    //}
-
-                    #endregion
-                    CheckFinished(ref finished, Current);
-                }
-                for (int i = pathStack.Length; i > 0; i--)
-                {
-                    switch (pathStack.Pop())
-                    {
-                        case -1:
-                            // Don't write that a decision was made
-                            break;
-                        case 0:
-                            // Starting Location - Not Technically a Move
-                            break;
-                        case 1:
-                            Path.Add("West");
-                            break;
-                        case 2:
-                            Path.Add("South");
-                            break;
-                        case 3:
-                            Path.Add("East");
-                            break;
-                        case 4:
-                            Path.Add("North");
-                            break;
-                        default:
-                            Path.Add("Error");
-                            break;
-                    }
-                }
-                Path.Reverse();
-            }
-            else
-            {
-                MessageBox.Show("The Maze isn't valid.");
-            }
-        }
-
-        private void NEWTakeStep(int[] next, int[] Current, ref MyStack stack)
-        {
-            // Directions are based off of how NEXT is set during CHECK-AROUND method
-
-            if (Current[0] > next[0] && Current[1] == next[1])
-            {
-                // Go West = 1
-                stack.Push(1);
-            }
-            else if (Current[0] == next[0] && Current[1] < next[1])
-            {
-                // Go South = 2
-                stack.Push(2);
-            }
-            else if (Current[0] < next[0] && Current[1] == next[1])
-            {
-                // Go East = 3
-                stack.Push(3);
-            }
-            else if (Current[0] == next[0] && Current[1] > next[1])
-            {
-                // Go North = 4
-                stack.Push(4);
-            }
-            else
-            {
-                RewindPath();
-            }
-        }
-
-        private void RewindPath(ref MyStack stack, ref int NumberOfChoices)
-        {
-            int first;
-            bool RewindingToChoice = true;
-            while (RewindingToChoice)
-            {
-                first = stack.Pop();
-                if (first == -1)
-                {
-                    bool CheckingHowManyChoices = true;
-                    NumberOfChoices = 1;
-                    int next;
-                    while (CheckingHowManyChoices)
-                    {
-                        next = stack.Pop();
-                        if (next == -1)
-                            NumberOfChoices++;
-                        else
-                        {
-                            CheckingHowManyChoices = false;
-                            stack.Push(next);
-                        }
-                    }
-                }
-            }
-        }
-
-        private void CheckFinished(ref bool finished, int[] Current)
-        {
-            if (myMaze.maze[Current[0], Current[1]] == MazeType.Finish)
-            {
-                finished = true;
-            }
-        }
-
-        private void CheckAround(ref Paths paths, int[] current, ref int[] Next, MyStack pathStack)
-        {
-            // TODO: Check if this works with triple or quadruple pathways
-
-            // IF statements check if the spot is open AND if it is a previous location
-            // Previous location directions are set in TAKE-NEXT-STEP method
-
-            // Checks Top - 2 Is a South Direction
-            if (myMaze.maze[current[0], current[1] - 1] != MazeType.Wall && pathStack.Top() != 2 && myMaze.maze[current[0], current[1] - 1] != MazeType.Attempted)
-            {
-                if (myMaze.maze[current[0], current[1] - 1] != MazeType.Start)
-                {
-                    paths.North = true;
-                    Next[0] = current[0];
-                    Next[1] = current[1] - 1;
-                }
-            }
-            // Checks Right - 1 Is a West Direction
-            if (myMaze.maze[current[0] + 1, current[1]] != MazeType.Wall && pathStack.Top() != 1 && myMaze.maze[current[0] + 1, current[1]] != MazeType.Attempted)
-            {
-                if (myMaze.maze[current[0] + 1, current[1]] != MazeType.Start)
-                {
-                    paths.East = true;
-                    Next[0] = current[0] + 1;
-                    Next[1] = current[1];
-                }
-            }
-            // Checks Bottom - 4 Is a North Direction
-            if (myMaze.maze[current[0], current[1] + 1] != MazeType.Wall && pathStack.Top() != 4 && myMaze.maze[current[0], current[1] + 1] != MazeType.Attempted)
-            {
-                if (myMaze.maze[current[0], current[1] + 1] != MazeType.Start)
-                {
-                    paths.South = true;
-                    Next[0] = current[0];
-                    Next[1] = current[1] + 1;
-                }
-            }
-            // Checks Left - 3 Is a East Direction
-            if (myMaze.maze[current[0] - 1, current[1]] != MazeType.Wall && pathStack.Top() != 3 && myMaze.maze[current[0] - 1, current[1]] != MazeType.Attempted)
-            {
-                if (myMaze.maze[current[0] - 1, current[1]] != MazeType.Start)
-                {
-                    paths.West = true;
-                    Next[0] = current[0] - 1;
-                    Next[1] = current[1];
-                }
-            }
-        }
-
-        private void TakeStepAfterNext(int[] Next, int[] Current, ref MyStack pathStack, int NumberOfChoices)
-        {
-            // Directions are based off of how NEXT is set during CHECK-AROUND method
-
-            if (Current[0] > Next[0] && Current[1] == Next[1])
-            {
-                // Go West
-                pathStack.Push(1);
-            }
-            else if (Current[0] == Next[0] && Current[1] < Next[1])
-            {
-                // Go South
-                pathStack.Push(2);
-            }
-            else if (Current[0] < Next[0] && Current[1] == Next[1])
-            {
-                // Go East
-                pathStack.Push(3);
-            }
-            else if (Current[0] == Next[0] && Current[1] > Next[1])
-            {
-                // Go North
-                pathStack.Push(4);
-            }
-        }
-
-        private void TakeNextStep(int[] Next, int[] Current, ref MyStack pathStack)
-        {
-            // Directions are based off of how NEXT is set during CHECK-AROUND method
-
-            if (Current[0] > Next[0] && Current[1] == Next[1])
-            {
-                // Go West
-                pathStack.Push(1);
-            }
-            else if (Current[0] == Next[0] && Current[1] < Next[1])
-            {
-                // Go South
-                pathStack.Push(2);
-            }
-            else if (Current[0] < Next[0] && Current[1] == Next[1])
-            {
-                // Go East
-                pathStack.Push(3);
-            }
-            else if (Current[0] == Next[0] && Current[1] > Next[1])
-            {
-                // Go North
-                pathStack.Push(4);
-            }
-        }
-
-        private bool LookingForSolution(bool finished)
-        {
-            if (finished)
-                return false;
-            else
-                return true;
-        }
-
-        private bool IsMazeValid()
-        {
-            int starts = 0;
-            int finishes = 0;
-            foreach (MazeType cell in myMaze.maze)
-            {
-                if (cell == MazeType.Start)
-                {
-                    starts++;
-                }
-                else if (cell == MazeType.Finish)
-                {
-                    finishes++;
-                }
-            }
-
-            if (starts != 1 || finishes != 1)
-                return false;
-            else
-                return true;
-        }
-
-        private void PrintPath(List<string> Path)
-        {
-            listView1.Items.Clear();
-            foreach (string step in Path)
-            {
-                listView1.Items.Add(step);
-            }
-            MessageBox.Show("Fin!");
-            myMaze.ResetMaze();
-            UpdateMaze();
-        }
-
-        private void dataGridView1_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            this.dataGridView1.ClearSelection();
-        }
     }
 }
