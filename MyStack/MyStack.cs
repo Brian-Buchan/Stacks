@@ -9,11 +9,11 @@ namespace MyStack
     class MyStack
     {
         int[] stackArray;
-        int arrayLenth;
+        int arrayLength;
 
         public int Length
         {
-            get { return arrayLenth; }
+            get { return arrayLength; }
         }
 
         public int GetItem(int i)
@@ -24,7 +24,7 @@ namespace MyStack
         public MyStack()
         {
             stackArray = new int[100];
-            arrayLenth = 0;
+            arrayLength = 0;
         }
 
         public void Push(int p)
@@ -37,8 +37,8 @@ namespace MyStack
                 }
                 else
                 {
-                    stackArray[arrayLenth] = p;
-                    arrayLenth++;
+                    stackArray[arrayLength] = p;
+                    arrayLength++;
                 }
             }
             catch (Exception)
@@ -57,9 +57,9 @@ namespace MyStack
                 }
                 else
                 {
-                    int p = stackArray[arrayLenth - 1];
-                    stackArray[arrayLenth - 1] = 0;
-                    arrayLenth--;
+                    int p = stackArray[arrayLength - 1];
+                    stackArray[arrayLength - 1] = 0;
+                    arrayLength--;
                     return p;
                 }
             }
@@ -79,7 +79,7 @@ namespace MyStack
                 }
                 else
                 {
-                    int TopINT = stackArray[arrayLenth - 1];
+                    int TopINT = stackArray[arrayLength - 1];
                     return TopINT;
                 }
 
@@ -92,7 +92,7 @@ namespace MyStack
 
         private bool IsEmpty()
         {
-            if (arrayLenth == 0)
+            if (arrayLength == 0)
             {
                 return true;
             }
@@ -104,7 +104,7 @@ namespace MyStack
 
         private bool IsFull()
         {
-            if (arrayLenth == stackArray.Length)
+            if (arrayLength == stackArray.Length)
             {
                 return true;
             }

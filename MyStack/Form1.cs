@@ -13,12 +13,16 @@ namespace MyStack
     public partial class Form1 : Form
     {
         MyStack ThisStack;
+        myQueue ThisQueue;
+        MyStack ReverseStack;
         Palindrome myPalindrome;
         Maze myMaze;
         public Form1()
         {
             InitializeComponent();
             ThisStack = new MyStack();
+            ThisQueue = new myQueue();
+            ReverseStack = new MyStack();
             myPalindrome = new Palindrome();
             myMaze = new Maze();
             GenerateMaze();
@@ -26,6 +30,8 @@ namespace MyStack
         }
 
         #region Assignment 3
+        #region Q1
+
         #region Form Methods
         private void UpdateMaze()
         {
@@ -371,6 +377,78 @@ namespace MyStack
 
         #endregion
 
+        #region Q2
+        private void button6_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ThisQueue.Enqueue((int)numericUpDown2.Value);
+                showQueue();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("The Queue is full.");
+            }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ThisQueue.Dequeue();
+                showQueue();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("The Queue is empty.");
+            }
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ReverseQueue();
+                showReverse();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("The Queue is empty.");
+            }
+        }
+
+        private void ReverseQueue()
+        {
+            for (int i = 0; i < ThisQueue.Length;)
+            {
+                ReverseStack.Push(ThisQueue.Dequeue());
+            }
+            for (int i = 0; i < ReverseStack.Length;)
+            {
+                ThisQueue.Enqueue(ReverseStack.Pop());
+            }
+        }
+
+        private void showQueue()
+        {
+            listBox1.Items.Clear();
+            for (int i = 0; i < ThisQueue.Length; i++)
+            {
+                listBox1.Items.Add(ThisQueue.GetItem(i));
+            }
+        }
+
+        private void showReverse()
+        {
+            listBox2.Items.Clear();
+            for (int i = 0; i < ThisQueue.Length; i++)
+            {
+                listBox2.Items.Add(ThisQueue.GetItem(i));
+            }
+        }
+        #endregion
+        #endregion
+
         #region Previous
         private void button1_Click(object sender, EventArgs e)
         {
@@ -479,8 +557,8 @@ namespace MyStack
             }
         }
 
-        #endregion
 
+        #endregion
 
     }
 }

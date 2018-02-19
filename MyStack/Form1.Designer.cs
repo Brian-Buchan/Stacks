@@ -44,6 +44,8 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.button5 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewButtonColumn();
@@ -55,13 +57,20 @@
             this.Column8 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Column9 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Column10 = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.button5 = new System.Windows.Forms.Button();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.listBox2 = new System.Windows.Forms.ListBox();
+            this.button8 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -181,6 +190,7 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -222,6 +232,24 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Maze";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // listView1
+            // 
+            this.listView1.Location = new System.Drawing.Point(367, 79);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(291, 222);
+            this.listView1.TabIndex = 2;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(367, 17);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(75, 23);
+            this.button5.TabIndex = 1;
+            this.button5.Text = "Calculate";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // dataGridView1
             // 
@@ -329,23 +357,73 @@
             this.Column10.Name = "Column10";
             this.Column10.Width = 25;
             // 
-            // button5
+            // tabPage3
             // 
-            this.button5.Location = new System.Drawing.Point(367, 17);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
-            this.button5.TabIndex = 1;
-            this.button5.Text = "Calculate";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.tabPage3.Controls.Add(this.button8);
+            this.tabPage3.Controls.Add(this.listBox2);
+            this.tabPage3.Controls.Add(this.button7);
+            this.tabPage3.Controls.Add(this.numericUpDown2);
+            this.tabPage3.Controls.Add(this.button6);
+            this.tabPage3.Controls.Add(this.listBox1);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(691, 491);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Revearse Queue";
+            this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // listView1
+            // listBox1
             // 
-            this.listView1.Location = new System.Drawing.Point(367, 79);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(291, 222);
-            this.listView1.TabIndex = 2;
-            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Location = new System.Drawing.Point(197, 18);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(120, 433);
+            this.listBox1.TabIndex = 3;
+            // 
+            // numericUpDown2
+            // 
+            this.numericUpDown2.Location = new System.Drawing.Point(35, 31);
+            this.numericUpDown2.Name = "numericUpDown2";
+            this.numericUpDown2.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDown2.TabIndex = 5;
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(57, 57);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(75, 23);
+            this.button6.TabIndex = 4;
+            this.button6.Text = "Enqueue";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(57, 86);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(75, 23);
+            this.button7.TabIndex = 6;
+            this.button7.Text = "Dequeue";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // listBox2
+            // 
+            this.listBox2.FormattingEnabled = true;
+            this.listBox2.Location = new System.Drawing.Point(490, 18);
+            this.listBox2.Name = "listBox2";
+            this.listBox2.Size = new System.Drawing.Size(120, 433);
+            this.listBox2.TabIndex = 7;
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(367, 57);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(75, 23);
+            this.button8.TabIndex = 8;
+            this.button8.Text = "Reverse";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // Form1
             // 
@@ -361,6 +439,8 @@
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.tabPage3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -396,6 +476,13 @@
         private System.Windows.Forms.DataGridViewButtonColumn Column10;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.ListBox listBox2;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.ListBox listBox1;
     }
 }
 
