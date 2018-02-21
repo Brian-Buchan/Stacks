@@ -58,6 +58,9 @@
             this.Column9 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Column10 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.button8 = new System.Windows.Forms.Button();
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.button7 = new System.Windows.Forms.Button();
@@ -72,40 +75,44 @@
             this.listBox3 = new System.Windows.Forms.ListBox();
             this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
             this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.listBox5 = new System.Windows.Forms.ListBox();
-            this.button10 = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
-            this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown5 = new System.Windows.Forms.NumericUpDown();
-            this.label7 = new System.Windows.Forms.Label();
-            this.numericUpDown6 = new System.Windows.Forms.NumericUpDown();
-            this.label8 = new System.Windows.Forms.Label();
-            this.button11 = new System.Windows.Forms.Button();
-            this.button12 = new System.Windows.Forms.Button();
-            this.label9 = new System.Windows.Forms.Label();
-            this.txtIndex = new System.Windows.Forms.TextBox();
-            this.numericUpDown7 = new System.Windows.Forms.NumericUpDown();
-            this.label10 = new System.Windows.Forms.Label();
             this.txtStopWatch = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.label10 = new System.Windows.Forms.Label();
+            this.numericUpDown7 = new System.Windows.Forms.NumericUpDown();
+            this.txtIndex = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.button12 = new System.Windows.Forms.Button();
+            this.button11 = new System.Windows.Forms.Button();
+            this.numericUpDown6 = new System.Windows.Forms.NumericUpDown();
+            this.label8 = new System.Windows.Forms.Label();
+            this.numericUpDown5 = new System.Windows.Forms.NumericUpDown();
+            this.label7 = new System.Windows.Forms.Label();
+            this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
+            this.label6 = new System.Windows.Forms.Label();
+            this.button10 = new System.Windows.Forms.Button();
+            this.listBox5 = new System.Windows.Forms.ListBox();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.label12 = new System.Windows.Forms.Label();
+            this.button13 = new System.Windows.Forms.Button();
+            this.numericUpDown8 = new System.Windows.Forms.NumericUpDown();
+            this.listBox6 = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabPage3.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
             this.tabPage5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown7)).BeginInit();
-            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
+            this.tabPage6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown8)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -228,6 +235,7 @@
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage5);
+            this.tabControl1.Controls.Add(this.tabPage6);
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -410,6 +418,40 @@
             this.tabPage3.Text = "Revearse Queue";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.radioButton2);
+            this.groupBox1.Controls.Add(this.radioButton1);
+            this.groupBox1.Location = new System.Drawing.Point(22, 33);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(151, 79);
+            this.groupBox1.TabIndex = 9;
+            this.groupBox1.TabStop = false;
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(16, 43);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(68, 17);
+            this.radioButton2.TabIndex = 1;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.Text = "Array List";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(16, 20);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(49, 17);
+            this.radioButton1.TabIndex = 0;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "Array";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            // 
             // button8
             // 
             this.button8.Location = new System.Drawing.Point(367, 57);
@@ -559,80 +601,85 @@
             this.tabPage5.Text = "Searches";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
-            // listBox5
+            // txtStopWatch
             // 
-            this.listBox5.FormattingEnabled = true;
-            this.listBox5.Location = new System.Drawing.Point(112, 16);
-            this.listBox5.Name = "listBox5";
-            this.listBox5.Size = new System.Drawing.Size(120, 459);
-            this.listBox5.TabIndex = 5;
+            this.txtStopWatch.Location = new System.Drawing.Point(280, 219);
+            this.txtStopWatch.Name = "txtStopWatch";
+            this.txtStopWatch.ReadOnly = true;
+            this.txtStopWatch.Size = new System.Drawing.Size(107, 20);
+            this.txtStopWatch.TabIndex = 20;
             // 
-            // button10
+            // label11
             // 
-            this.button10.Location = new System.Drawing.Point(18, 25);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(75, 23);
-            this.button10.TabIndex = 6;
-            this.button10.Text = "Generate";
-            this.button10.UseVisualStyleBackColor = true;
-            this.button10.Click += new System.EventHandler(this.button10_Click);
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(289, 203);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(90, 13);
+            this.label11.TabIndex = 19;
+            this.label11.Text = "StopWatch Timer";
             // 
-            // label6
+            // label10
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(29, 75);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(51, 13);
-            this.label6.TabIndex = 7;
-            this.label6.Text = "ArraySize";
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(295, 30);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(71, 13);
+            this.label10.TabIndex = 18;
+            this.label10.Text = "Search Value";
             // 
-            // numericUpDown4
+            // numericUpDown7
             // 
-            this.numericUpDown4.Location = new System.Drawing.Point(18, 91);
-            this.numericUpDown4.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numericUpDown4.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDown4.Name = "numericUpDown4";
-            this.numericUpDown4.Size = new System.Drawing.Size(75, 20);
-            this.numericUpDown4.TabIndex = 8;
-            this.numericUpDown4.Value = new decimal(new int[] {
+            this.numericUpDown7.Location = new System.Drawing.Point(280, 46);
+            this.numericUpDown7.Maximum = new decimal(new int[] {
             10,
             0,
             0,
             0});
-            // 
-            // numericUpDown5
-            // 
-            this.numericUpDown5.Location = new System.Drawing.Point(18, 157);
-            this.numericUpDown5.Maximum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.numericUpDown5.Minimum = new decimal(new int[] {
+            this.numericUpDown7.Minimum = new decimal(new int[] {
             10,
             0,
             0,
             -2147483648});
-            this.numericUpDown5.Name = "numericUpDown5";
-            this.numericUpDown5.Size = new System.Drawing.Size(75, 20);
-            this.numericUpDown5.TabIndex = 10;
+            this.numericUpDown7.Name = "numericUpDown7";
+            this.numericUpDown7.Size = new System.Drawing.Size(107, 20);
+            this.numericUpDown7.TabIndex = 17;
             // 
-            // label7
+            // txtIndex
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(29, 141);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(51, 13);
-            this.label7.TabIndex = 9;
-            this.label7.Text = "MinValue";
+            this.txtIndex.Location = new System.Drawing.Point(280, 157);
+            this.txtIndex.Name = "txtIndex";
+            this.txtIndex.ReadOnly = true;
+            this.txtIndex.Size = new System.Drawing.Size(107, 20);
+            this.txtIndex.TabIndex = 16;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(305, 141);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(33, 13);
+            this.label9.TabIndex = 15;
+            this.label9.Text = "Index";
+            // 
+            // button12
+            // 
+            this.button12.Location = new System.Drawing.Point(280, 104);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(107, 23);
+            this.button12.TabIndex = 14;
+            this.button12.Text = "Linear Search";
+            this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.button12_Click);
+            // 
+            // button11
+            // 
+            this.button11.Location = new System.Drawing.Point(280, 75);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(107, 23);
+            this.button11.TabIndex = 13;
+            this.button11.Text = "Bianary Search";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
             // numericUpDown6
             // 
@@ -660,119 +707,127 @@
             this.label8.TabIndex = 11;
             this.label8.Text = "MaxValue";
             // 
-            // button11
+            // numericUpDown5
             // 
-            this.button11.Location = new System.Drawing.Point(280, 75);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(107, 23);
-            this.button11.TabIndex = 13;
-            this.button11.Text = "Bianary Search";
-            this.button11.UseVisualStyleBackColor = true;
-            this.button11.Click += new System.EventHandler(this.button11_Click);
-            // 
-            // button12
-            // 
-            this.button12.Location = new System.Drawing.Point(280, 104);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(107, 23);
-            this.button12.TabIndex = 14;
-            this.button12.Text = "Linear Search";
-            this.button12.UseVisualStyleBackColor = true;
-            this.button12.Click += new System.EventHandler(this.button12_Click);
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(305, 141);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(33, 13);
-            this.label9.TabIndex = 15;
-            this.label9.Text = "Index";
-            // 
-            // txtIndex
-            // 
-            this.txtIndex.Location = new System.Drawing.Point(280, 157);
-            this.txtIndex.Name = "txtIndex";
-            this.txtIndex.ReadOnly = true;
-            this.txtIndex.Size = new System.Drawing.Size(107, 20);
-            this.txtIndex.TabIndex = 16;
-            // 
-            // numericUpDown7
-            // 
-            this.numericUpDown7.Location = new System.Drawing.Point(280, 46);
-            this.numericUpDown7.Maximum = new decimal(new int[] {
+            this.numericUpDown5.Location = new System.Drawing.Point(18, 157);
+            this.numericUpDown5.Maximum = new decimal(new int[] {
             10,
             0,
             0,
             0});
-            this.numericUpDown7.Minimum = new decimal(new int[] {
+            this.numericUpDown5.Minimum = new decimal(new int[] {
             10,
             0,
             0,
             -2147483648});
-            this.numericUpDown7.Name = "numericUpDown7";
-            this.numericUpDown7.Size = new System.Drawing.Size(107, 20);
-            this.numericUpDown7.TabIndex = 17;
+            this.numericUpDown5.Name = "numericUpDown5";
+            this.numericUpDown5.Size = new System.Drawing.Size(75, 20);
+            this.numericUpDown5.TabIndex = 10;
             // 
-            // label10
+            // label7
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(295, 30);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(71, 13);
-            this.label10.TabIndex = 18;
-            this.label10.Text = "Search Value";
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(29, 141);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(51, 13);
+            this.label7.TabIndex = 9;
+            this.label7.Text = "MinValue";
             // 
-            // txtStopWatch
+            // numericUpDown4
             // 
-            this.txtStopWatch.Location = new System.Drawing.Point(280, 219);
-            this.txtStopWatch.Name = "txtStopWatch";
-            this.txtStopWatch.ReadOnly = true;
-            this.txtStopWatch.Size = new System.Drawing.Size(107, 20);
-            this.txtStopWatch.TabIndex = 20;
+            this.numericUpDown4.Location = new System.Drawing.Point(18, 91);
+            this.numericUpDown4.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericUpDown4.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown4.Name = "numericUpDown4";
+            this.numericUpDown4.Size = new System.Drawing.Size(75, 20);
+            this.numericUpDown4.TabIndex = 8;
+            this.numericUpDown4.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
             // 
-            // label11
+            // label6
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(289, 203);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(90, 13);
-            this.label11.TabIndex = 19;
-            this.label11.Text = "StopWatch Timer";
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(29, 75);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(51, 13);
+            this.label6.TabIndex = 7;
+            this.label6.Text = "ArraySize";
             // 
-            // groupBox1
+            // button10
             // 
-            this.groupBox1.Controls.Add(this.radioButton2);
-            this.groupBox1.Controls.Add(this.radioButton1);
-            this.groupBox1.Location = new System.Drawing.Point(22, 33);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(151, 79);
-            this.groupBox1.TabIndex = 9;
-            this.groupBox1.TabStop = false;
+            this.button10.Location = new System.Drawing.Point(18, 25);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(75, 23);
+            this.button10.TabIndex = 6;
+            this.button10.Text = "Generate";
+            this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
-            // radioButton1
+            // listBox5
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(16, 20);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(49, 17);
-            this.radioButton1.TabIndex = 0;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Array";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            this.listBox5.FormattingEnabled = true;
+            this.listBox5.Location = new System.Drawing.Point(112, 16);
+            this.listBox5.Name = "listBox5";
+            this.listBox5.Size = new System.Drawing.Size(120, 459);
+            this.listBox5.TabIndex = 5;
             // 
-            // radioButton2
+            // tabPage6
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(16, 43);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(68, 17);
-            this.radioButton2.TabIndex = 1;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Array List";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
+            this.tabPage6.Controls.Add(this.listBox6);
+            this.tabPage6.Controls.Add(this.numericUpDown8);
+            this.tabPage6.Controls.Add(this.button13);
+            this.tabPage6.Controls.Add(this.label12);
+            this.tabPage6.Location = new System.Drawing.Point(4, 22);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Size = new System.Drawing.Size(691, 491);
+            this.tabPage6.TabIndex = 5;
+            this.tabPage6.Text = "Radix LinkedList";
+            this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(42, 26);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(71, 13);
+            this.label12.TabIndex = 0;
+            this.label12.Text = "Input Number";
+            // 
+            // button13
+            // 
+            this.button13.Location = new System.Drawing.Point(30, 68);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(75, 23);
+            this.button13.TabIndex = 1;
+            this.button13.Text = "button13";
+            this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
+            // 
+            // numericUpDown8
+            // 
+            this.numericUpDown8.Location = new System.Drawing.Point(10, 42);
+            this.numericUpDown8.Name = "numericUpDown8";
+            this.numericUpDown8.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDown8.TabIndex = 2;
+            // 
+            // listBox6
+            // 
+            this.listBox6.FormattingEnabled = true;
+            this.listBox6.Location = new System.Drawing.Point(145, 26);
+            this.listBox6.Name = "listBox6";
+            this.listBox6.Size = new System.Drawing.Size(120, 459);
+            this.listBox6.TabIndex = 6;
             // 
             // Form1
             // 
@@ -789,18 +844,21 @@
             this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tabPage3.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown7)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
+            this.tabPage6.ResumeLayout(false);
+            this.tabPage6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown8)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -870,6 +928,11 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.TabPage tabPage6;
+        private System.Windows.Forms.NumericUpDown numericUpDown8;
+        private System.Windows.Forms.Button button13;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.ListBox listBox6;
     }
 }
 

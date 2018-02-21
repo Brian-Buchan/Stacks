@@ -22,6 +22,7 @@ namespace MyStack
         Maze myMaze;
         Stopwatch Stopwatch;
         bool ArrayListChecked;
+        LinkedList<int> MyLinkedList;
 
         public Form1()
         {
@@ -34,6 +35,7 @@ namespace MyStack
             myPalindrome = new Palindrome();
             myMaze = new Maze();
             Stopwatch = new Stopwatch();
+            MyLinkedList = new LinkedList<int>();
 
             GenerateMaze();
             UpdateMaze();
@@ -43,6 +45,7 @@ namespace MyStack
             numericUpDown6.Minimum = 0;
             numericUpDown7.Minimum = decimal.MinValue;
             numericUpDown7.Maximum = decimal.MaxValue;
+            numericUpDown8.Maximum = decimal.MaxValue;
             radioButton1.Checked = true;
             ArrayListChecked = false;
         }
@@ -806,5 +809,33 @@ namespace MyStack
         // Q3 & Q4 code will be located in Assignment 3 - Q2
         #endregion
 
+        #region Assignment 5
+        private void button13_Click(object sender, EventArgs e)
+        {
+            MyLinkedList.Clear();
+            int number = (int)numericUpDown8.Value;
+
+            for (int x = 0; x <= n.GetUpperBound(0); x++)
+            {
+                switch (digit)
+                {
+                    case DigitType.ones:
+                        snum = n[x] % 10;
+                        que[snum].Enqueue(n[x]);
+                        break;
+                    case DigitType.tens:
+                        snum = n[x] / 10;
+                        que[snum].Enqueue(n[x]);
+                        break;
+                    case DigitType.hundreds:
+                        snum = n[x] / 100;
+                        que[snum].Enqueue(n[x]);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        #endregion
     }
 }
