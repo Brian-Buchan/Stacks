@@ -55,7 +55,9 @@
     <Compile Include="MazeCell.cs" />
     <Compile Include="myException.cs" />
     <Compile Include="myQueue.cs" />
+    <Compile Include="MyQueueARRL.cs" />
     <Compile Include="MyStack.cs" />
+    <Compile Include="MyStackARRL.cs" />
     <Compile Include="Palindrome.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

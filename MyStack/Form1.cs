@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace MyStack
 {
@@ -14,22 +15,39 @@ namespace MyStack
     {
         MyStack ThisStack;
         myQueue ThisQueue;
+        MyQueueARRL ThisQueueArrL;
         MyStack ReverseStack;
+        MyStackARRL ReverseStackArrL;
         Palindrome myPalindrome;
         Maze myMaze;
+        Stopwatch Stopwatch;
+        bool ArrayListChecked;
+
         public Form1()
         {
             InitializeComponent();
             ThisStack = new MyStack();
             ThisQueue = new myQueue();
+            ThisQueueArrL = new MyQueueARRL();
             ReverseStack = new MyStack();
+            ReverseStackArrL = new MyStackARRL();
             myPalindrome = new Palindrome();
             myMaze = new Maze();
+            Stopwatch = new Stopwatch();
+
             GenerateMaze();
             UpdateMaze();
+            numericUpDown5.Maximum = 0;
+            numericUpDown5.Minimum = decimal.MinValue;
+            numericUpDown6.Maximum = decimal.MaxValue;
+            numericUpDown6.Minimum = 0;
+            numericUpDown7.Minimum = decimal.MinValue;
+            numericUpDown7.Maximum = decimal.MaxValue;
+            radioButton1.Checked = true;
+            ArrayListChecked = false;
         }
 
-        #region Previous
+        #region Previous Assignments
         private void button1_Click(object sender, EventArgs e)
         {
             AddNumberToStack((int)numericUpDown1.Value);
@@ -136,8 +154,6 @@ namespace MyStack
                 PalindromeRESULT.Text = "Is not a Palindrome.";
             }
         }
-
-
         #endregion
 
         #region Assignment 3
@@ -496,11 +512,34 @@ namespace MyStack
         #endregion
 
         #region Q2
+        // Assignment 4 - Q3 and Q4 additions are noted above methods
+
+        // Needed for Assignment 4
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            ArrayListChecked = false;
+            showQueue();
+        }
+
+        // Needed for Assignment 4
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            ArrayListChecked = true;
+            showQueue();
+        }
+
         private void button6_Click(object sender, EventArgs e)
         {
             try
             {
-                ThisQueue.Enqueue((int)numericUpDown2.Value);
+                if (ArrayListChecked)
+                {
+                    ThisQueueArrL.Enqueue((int)numericUpDown2.Value);
+                }
+                else
+                {
+                    ThisQueue.Enqueue((int)numericUpDown2.Value);
+                }
                 showQueue();
             }
             catch (Exception)
@@ -513,7 +552,14 @@ namespace MyStack
         {
             try
             {
-                ThisQueue.Dequeue();
+                if (ArrayListChecked)
+                {
+                    ThisQueueArrL.Dequeue();
+                }
+                else
+                {
+                    ThisQueue.Dequeue();
+                }
                 showQueue();
             }
             catch (Exception)
@@ -535,66 +581,229 @@ namespace MyStack
             }
         }
 
+        // Ass4 - Q3 Q4
         private void ReverseQueue()
         {
-            for (int i = 0; i < ThisQueue.Length;)
+            // Updated to choose Array or ArrayList
+            if (ArrayListChecked)
             {
-                ReverseStack.Push(ThisQueue.Dequeue());
+                for (int i = 0; i < ThisQueueArrL.Length;)
+                {
+                    ReverseStackArrL.Push(ThisQueueArrL.Dequeue());
+                }
+                for (int i = 0; i < ReverseStackArrL.Length;)
+                {
+                    ThisQueueArrL.Enqueue(ReverseStackArrL.Pop());
+                }
             }
-            for (int i = 0; i < ReverseStack.Length;)
+            else
             {
-                ThisQueue.Enqueue(ReverseStack.Pop());
+                for (int i = 0; i < ThisQueue.Length;)
+                {
+                    ReverseStack.Push(ThisQueue.Dequeue());
+                }
+                for (int i = 0; i < ReverseStack.Length;)
+                {
+                    ThisQueue.Enqueue(ReverseStack.Pop());
+                }
             }
+
+            // Original for Assignment 3
+            //for (int i = 0; i < ThisQueue.Length;)
+            //{
+            //    ReverseStack.Push(ThisQueue.Dequeue());
+            //}
+            //for (int i = 0; i < ReverseStack.Length;)
+            //{
+            //    ThisQueue.Enqueue(ReverseStack.Pop());
+            //}
         }
 
+        // Ass4 - Q3 Q4
         private void showQueue()
         {
-            listBox1.Items.Clear();
-            for (int i = 0; i < ThisQueue.Length; i++)
+            // Updated to choose Array or ArrayList
+            if (ArrayListChecked)
             {
-                listBox1.Items.Add(ThisQueue.GetItem(i));
+                listBox1.Items.Clear();
+                for (int i = 0; i < ThisQueueArrL.Length; i++)
+                {
+                    listBox1.Items.Add(ThisQueueArrL.GetItem(i));
+                }
             }
+            else
+            {
+                listBox1.Items.Clear();
+                for (int i = 0; i < ThisQueue.Length; i++)
+                {
+                    listBox1.Items.Add(ThisQueue.GetItem(i));
+                }
+            }
+
+            // Original for Assignment 3
+            //listBox1.Items.Clear();
+            //for (int i = 0; i < ThisQueue.Length; i++)
+            //{
+            //    listBox1.Items.Add(ThisQueue.GetItem(i));
+            //}
         }
 
+        // Ass4 - Q3 Q4
         private void showReverse()
         {
-            listBox2.Items.Clear();
-            for (int i = 0; i < ThisQueue.Length; i++)
+            // Updated to choose Array or ArrayList
+            if (ArrayListChecked)
             {
-                listBox2.Items.Add(ThisQueue.GetItem(i));
+                listBox2.Items.Clear();
+                for (int i = 0; i < ThisQueueArrL.Length; i++)
+                {
+                    listBox2.Items.Add(ThisQueueArrL.GetItem(i));
+                }
             }
+            else
+            {
+                listBox2.Items.Clear();
+                for (int i = 0; i < ThisQueue.Length; i++)
+                {
+                    listBox2.Items.Add(ThisQueue.GetItem(i));
+                }
+            }
+
+            // Original for Assignment 3
+            //listBox2.Items.Clear();
+            //for (int i = 0; i < ThisQueue.Length; i++)
+            //{
+            //    listBox2.Items.Add(ThisQueue.GetItem(i));
+            //}
         }
         #endregion
-
         #endregion
 
         #region Assignment 4
-
         #region Q1
         private void button9_Click(object sender, EventArgs e)
         {
-            int i = 1;
+            listBox3.Items.Clear();
+            listBox4.Items.Clear();
+            int i = (int)numericUpDown3.Value;
+            int square = 0;
+
             while (i > 0)
             {
-                i = DoSquare((int)numericUpDown3.Value);
-                int half = i / 2;
-                numericUpDown3.Value = half;
-                listBox3.Items.Add(half.ToString());
-                listBox4.Items.Add(i.ToString());
+                listBox3.Items.Add(i.ToString());
+                square = DoSquare(ref i);
+                numericUpDown3.Value = i;
+                listBox4.Items.Add(square.ToString());
             }
         }
 
-        private int DoSquare(int n)
+        private int DoSquare(ref int n)
         {
-            return (int)Math.Sqrt(n);
+            int square = n * n;
+            n = n / 2;
+            return square;
         }
 
         #endregion
 
         #region Q2
+        int[] SearchArray;
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            listBox5.Items.Clear();
+            Random r = new Random(DateTime.Now.Second);
+            SearchArray = new int[(int)numericUpDown4.Value];
+
+            for (int i = 0; i < SearchArray.Length; i++)
+            {
+                SearchArray[i] = r.Next((int)numericUpDown5.Value, (int)numericUpDown6.Value);
+            }
+
+            BubbleSortArray(ref SearchArray);
+
+            for (int i = 0; i < SearchArray.Length; i++)
+            {
+                listBox5.Items.Add(SearchArray[i]);
+            }
+        }
+
+        private static void BubbleSortArray(ref int[] SortArray)
+        {
+            for (int i = SortArray.Length; i > -1; i--)
+            {
+                for (int j = 0; j < i - 1; j++)
+                {
+                    if (SortArray[j] > SortArray[j + 1])
+                    {
+                        int key = SortArray[j + 1];
+                        SortArray[j + 1] = SortArray[j];
+                        SortArray[j] = key;
+                    }
+                }
+            }
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            txtIndex.Text = DoBianarySearch(SearchArray, (int)numericUpDown7.Value).ToString();
+            txtStopWatch.Text = Stopwatch.Elapsed.ToString();
+            Stopwatch.Reset();
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            txtIndex.Text = DoLinearSearch(SearchArray, (int)numericUpDown7.Value).ToString();
+            txtStopWatch.Text = Stopwatch.Elapsed.ToString();
+            Stopwatch.Reset();
+        }
+
+        private int DoBianarySearch(int[] searchArray, int value)
+        {
+            Stopwatch.Start();
+            int min = 0;
+            int max = searchArray.Length - 1;
+
+            while (min <= max)
+            {
+                int mid = (min + max) / 2;
+
+                if (searchArray[mid] == value)
+                {
+                    return mid;
+                }
+                else if (value < searchArray[mid])
+                {
+                    // Half is too big, search lower half
+                    max = mid - 1;
+                }
+                else
+                {
+                    // Half is too small, search upper half
+                    min = mid + 1;
+                }
+            }
+            Stopwatch.Stop();
+            return -1;
+        }
+
+        private int DoLinearSearch(int[] searchArray, int value)
+        {
+            Stopwatch.Start();
+            for (int i = 0; i < searchArray.Length; i++)
+            {
+                if (searchArray[i] == value)
+                {
+                    return i;
+                }
+            }
+            Stopwatch.Stop();
+            return -1;
+        }
 
         #endregion
 
+        // Q3 & Q4 code will be located in Assignment 3 - Q2
         #endregion
 
     }
